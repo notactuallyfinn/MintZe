@@ -1,0 +1,20 @@
+.container {
+  display: flex; /* or inline-flex */
+  justify-content: space-evenly;
+  gap: 1%;
+  margin-top: 50px;
+}
+.bodycomponents {
+	margin: 1%;
+}
+.card {
+	margin: 1%;
+}
+
+
+@media only screen and (max-width: 1000px) {
+  .listInfos {        
+    display: flex;
+    flex-direction: column;
+  }
+}

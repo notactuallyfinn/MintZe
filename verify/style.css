@@ -1,0 +1,12 @@
+.container {
+  display: flex; /* or inline-flex */
+  justify-content: space-evenly;
+  gap: 1%;
+  
+}
+.bodycomponents {
+	margin: 1%;
+}
+.card {
+	margin: 1%;
+}
