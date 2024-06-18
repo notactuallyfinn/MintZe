@@ -4,7 +4,7 @@
     Erstellen einer Aktivität
 */
 
-include "../util.php";
+include "util.php";
 
 $kuerzel = protect($_GET["Kuerzel"]);
 $authKey = protect($_GET["AuthKey"]);

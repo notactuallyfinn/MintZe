@@ -1,5 +1,5 @@
 <?php
-include "../util.php";
+include "util.php";
 
 $activityId = protect($_GET["AktivitaetID"]);
 

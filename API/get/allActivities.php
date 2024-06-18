@@ -1,5 +1,5 @@
 <?php 
-include "../util.php";
+include "util.php";
 
 $query = protect($_GET["Query"]);
 

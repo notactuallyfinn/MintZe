@@ -1,5 +1,5 @@
 <?php 
-include "../util.php";
+include "util.php";
 include "../get/passwordHash.php";
 
 

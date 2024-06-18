@@ -1,5 +1,5 @@
 <?php
-include "../util.php";
+include "util.php";
 include "../get/passwordHash.php";
 
 $password = password_hash(protect($_GET["Passwort"]), PASSWORD_DEFAULT);

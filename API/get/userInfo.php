@@ -1,5 +1,5 @@
 <?php
-include "../util.php";
+include "util.php";
 include "passwordHash.php";
 
 $schuelerID = protect($_GET["SchuelerID"]);

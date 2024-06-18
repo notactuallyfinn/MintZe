@@ -1,5 +1,5 @@
 <?php
-include "../util.php";
+include "util.php";
 
 $schuelerEmail = protect($_GET["Email"]);
 $conn = connect();

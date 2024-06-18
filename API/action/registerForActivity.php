@@ -4,7 +4,7 @@
  * Registrierung vom Schüler in eine Aktivität
  */
 
-include "../util.php";
+include "util.php";
 
 $schuelerID = protect($_GET["SchuelerID"]);
 $authKey = protect($_GET["AuthKey"]);

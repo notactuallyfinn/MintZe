@@ -3,7 +3,7 @@
   Bestätigung vom Lehrer, dass Schueler bei Aktivität teil nimmt
 */
 
-include "../util.php";
+include "util.php";
 
 $kuerzel = protect($_GET["Kuerzel"]);
 $authKey = protect($_GET["AuthKey"]);

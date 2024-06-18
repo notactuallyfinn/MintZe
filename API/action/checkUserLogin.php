@@ -3,7 +3,7 @@
   Bestätigung vom Lehrer, dass Schueler bei Aktivität teil nimmt
 */
 
-include "../util.php";
+include "util.php";
 
 $userName = protect($_GET["UserName"]);
 $loginPassword = protect($_GET["LoginPassword"]);

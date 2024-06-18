@@ -1,5 +1,5 @@
 <?php
-include "../util.php";
+include "util.php";
 
 $conn = connect();
 $nachname = protect($_GET["Nachname"]);
