@@ -1,9 +1,9 @@
 <?php
 function connect(): mysqli {
-    $db_benutzer = '';
-    $db_passwort = '';
-    $db_name = '';
-    $db_server = '';
+    $db_benutzer = 'databaselogin';
+    $db_passwort = 'LFC2647vfk';
+    $db_name = 'mintze_db';
+    $db_server = '192.168.2.110';
     $conn = new mysqli($db_server, $db_benutzer, $db_passwort, $db_name);
     if ($conn->connect_errno) {
         die("Verbindung fehlgeschlagen: " . $conn->connect_error);
