@@ -2,13 +2,18 @@
 include "util.php";
 include "passwordHash.php";
 
-$password = protect($_GET["Passwort"]);
-$email = protect($_GET["Email"]);
+if (!isset($_POST["Passwort"]) || !isset($_POST["Email"])) {
+    throwError("Missing user input", 400, "Fehlende Eingabedaten");
+    exit();
+}
+
+$password = protect($_POST["Passwort"]);
+$email = protect($_POST["Email"]);
 # Zugangsdaten
 
 # Trennung von Schüler und Lehrer
 $conn = connect();
-$sql1 = "SELECT * FROM Schueler WHERE EMail = '$email'";
+$sql1 = "SELECT * FROM Schueler WHERE Vorname = '$email'";
 $sql2 = "SELECT * FROM Lehrer WHERE EMail = '$email'";
 $res1 = $conn->query($sql1);
 $res2 = $conn->query($sql2);
