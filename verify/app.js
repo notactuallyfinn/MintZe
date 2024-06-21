@@ -27,14 +27,19 @@ var vue = new Vue({
     },
     methods: {
         checkUserPassword: function(email, userPassword, recall) {
-            let d = {
+            console.log("Email: " + email);
+            console.log("Password:" + userPassword);
+
+            let data = {
                 "Passwort": userPassword,
                 "Email": email
             }
+            
             let xml = new XMLHttpRequest();
-            xml.open("GET", this.echoParams(this.apiEndpoint + "get/userLoginPassword.php", d));
-            xml.send();
-
+            xml.open("POST", this.apiEndpoint + "get/userLoginPassword.php");
+            xml.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xml.send(JSON.stringify(data));
+        
             xml.onload = function() {
                 recall(this.response);
             }
