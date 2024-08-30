@@ -60,8 +60,7 @@
 					<div class="list">
 						<div class="listItemAnmeldung" v-for="item in pendingActivities">
 							<p class="font-weight-normal">{{ item.Vorname }}
-							</p><!--<i class="fa-solid fa-certificate funcButton" @click="react(item.RequestId, 1)"></i><i
-								class="fa-solid fa-calendar-xmark funcButton" @click="react(item.RequestId, 0)"></i>-->
+							</p><i class="fa-solid fa-check funcButton" @click="confirmActivity(item.AID, item.SID, item.Datum)"></i>
 						</div>
 					</div>
 					<div class="search">

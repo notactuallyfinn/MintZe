@@ -15,7 +15,7 @@ try {
 
 try {
     $filter = "%" . $filter . "%";
-    $sqlRun = "SELECT A.Name AS Name, A.Beschreibung AS Beschreibung, mA.Klassenstufe AS Klassenstufe, S.Vorname AS Vorname, S.Name AS Nachname, S.Benutzername AS Benutzername FROM Schueler AS S, machtA AS mA, Aktivitaet AS A, Lehrer AS L WHERE L.Kuerzel = '$Kuerzel' AND L.AuthKey = '$authKey' AND L.Kuerzel = mA.Kuerzel AND mA.SID = S.SID AND A.AID = mA.AID AND mA.bestaetigt = '$confirmed' AND (S.Name LIKE '$filter' OR S.Vorname LIKE '$filter' OR S.Benutzername LIKE '$filter')";
+    $sqlRun = "SELECT A.Name AS Name, A.Beschreibung AS Beschreibung, mA.Klassenstufe AS Klassenstufe, mA.SID AS SID, mA.AID AS AID, mA.Datum AS Datum, S.Vorname AS Vorname, S.Name AS Nachname, S.Benutzername AS Benutzername FROM Schueler AS S, machtA AS mA, Aktivitaet AS A, Lehrer AS L WHERE L.Kuerzel = '$Kuerzel' AND L.AuthKey = '$authKey' AND L.Kuerzel = mA.Kuerzel AND mA.SID = S.SID AND A.AID = mA.AID AND mA.bestaetigt = '$confirmed' AND (S.Name LIKE '$filter' OR S.Vorname LIKE '$filter' OR S.Benutzername LIKE '$filter')";
     $res = $conn->query($sqlRun);
 } catch (Exception $e) {
     throwError("Something went wrong with the query", 500, "Etwas ist mit der Datenbankabfrage falsch gelaufen");

@@ -5,7 +5,7 @@ $SID = protect($_GET["SID"]);
 $authKey = protect($_GET["AuthKey"]);
 $confirmed = protect($_GET["confirmed"]);
 $filter = protect($_GET["filter"]);
-# Zugangsdaten
+
 try {
     $conn = connect();
 } catch (Exception $e) {

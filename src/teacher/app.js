@@ -37,26 +37,42 @@ var vue = new Vue({
                 }
             }
         },
-        getPendingActivities: function ($filter) {
+        getPendingActivities: function (filter) {
             let self = this;
             let data = {
                 "Kuerzel": this.Kuerzel,
                 "AuthKey": this.AuthKey,
                 "confirmed": 0,
-                "filter": $filter
+                "filter": filter
             }
             let xml = new XMLHttpRequest();
             xml.open("GET", this.echoParams(this.apiEndpoint + "get/pendingActivitesTeacher.php", data));
             xml.send();
             xml.onload = function () {
-                console.log(this.response);
                 let data = JSON.parse(this.response);
                 if (data.Status == "200") {
                     self.pendingActivities = data.Items;
-                    console.log(self.pendingActivities);
                 } else {
                     window.location.replace("../");
                 }
+            }
+        },
+
+        confirmActivity(AID, SID, date) {
+            let self = this;
+            let data = {
+                "SID": SID,
+                "AID": AID,
+                "date": date,
+                "AuthKey": this.AuthKey,
+                "Kuerzel": this.Kuerzel
+            }
+            let xml = new XMLHttpRequest();
+            xml.open("GET", this.echoParams(this.apiEndpoint + "action/registerForActivity.php", data));
+            xml.send();
+            xml.onload = function() {
+                self.getPendingActivities("");
+                console.log(this.response);
             }
         },
 
