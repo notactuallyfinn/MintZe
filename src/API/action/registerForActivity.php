@@ -1,5 +1,5 @@
 <?php
-include "../get/util.php";
+include "../util.php";
 
 $SID = protect($_GET["SID"]);
 $AID = protect($_GET["AID"]);
@@ -25,7 +25,7 @@ try {
 if ($res->num_rows > 1) {
     throwError("There is more then one user with the same ID", 500, "Es gibt mehr als einen Benutzer mit der selben ID");
     exit();
-} elseif ($res->num_rows == 0) {
+} elseif (isEmpty($res)) {
     throwError("There is no user with the supplied ID or the AuthKey is wrong", 500, "Es exitiert kein Benutzer mit der ID oder der AuthKey ist falsch");
     exit();
 }

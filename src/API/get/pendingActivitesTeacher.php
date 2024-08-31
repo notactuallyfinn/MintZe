@@ -1,5 +1,5 @@
 <?php
-include "util.php";
+include "../util.php";
 
 $Kuerzel = protect($_GET["Kuerzel"]);
 $authKey = protect($_GET["AuthKey"]);

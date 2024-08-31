@@ -1,5 +1,5 @@
 <?php
-include "util.php";
+include "../util.php";
 
 $SID = protect($_GET["SID"]);
 $authKey = protect($_GET["AuthKey"]);

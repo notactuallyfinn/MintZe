@@ -1,6 +1,5 @@
 <?php
-include "util.php";
-include "passwordHash.php";
+include "../util.php";
 
 $kuerzel = protect($_GET["Kuerzel"]);
 $authKey = protect($_GET["AuthKey"]);

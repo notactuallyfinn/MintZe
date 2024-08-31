@@ -1,5 +1,5 @@
 <?php
-include "util.php";
+include "../util.php";
 include "passwordHash.php";
 
 $_POST = json_decode(file_get_contents("php://input"), true);
