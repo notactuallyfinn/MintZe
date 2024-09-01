@@ -68,7 +68,7 @@ var vue = new Vue({
                 "Kuerzel": this.Kuerzel
             }
             let xml = new XMLHttpRequest();
-            xml.open("GET", this.echoParams(this.apiEndpoint + "action/registerForActivity.php", data));
+            xml.open("GET", this.echoParams(this.apiEndpoint + "action/confirmActivity.php", data));
             xml.send();
             xml.onload = function() {
                 self.getPendingActivities("");

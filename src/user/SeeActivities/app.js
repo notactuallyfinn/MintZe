@@ -44,13 +44,13 @@ var vue = new Vue({
             }
         },
 
-        getPendingActivities: function($filter){
+        getPendingActivities: function(filter){
             let self = this;
             let data = {
                 "SID": this.SID,
                 "AuthKey": this.AuthKey,
                 "confirmed": 0,
-                "filter": $filter
+                "filter": filter
             }
             let xml = new XMLHttpRequest();
             xml.open("GET", this.echoParams(this.apiEndpoint + "get/activities.php", data));
@@ -64,13 +64,13 @@ var vue = new Vue({
                 }
             }
         },
-        getConfirmedActivities: function($filter){
+        getConfirmedActivities: function(filter){
             let self = this;
             let data = {
                 "SID": this.SID,
                 "AuthKey": this.AuthKey,
                 "confirmed": 1,
-                "filter": $filter
+                "filter": filter
             }
             let xml = new XMLHttpRequest();
             xml.open("GET", this.echoParams(this.apiEndpoint + "get/activities.php", data));
