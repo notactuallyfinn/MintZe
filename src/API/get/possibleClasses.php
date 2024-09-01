@@ -2,14 +2,8 @@
 include "../util.php";
 
 $SID = protect($_GET["SID"]);
-$AID = protect($_GET["AID"]);
-$kuerzel = protect($_GET["Kuerzel"]);
-$gradeLevel = protect($_GET["GradeLevel"]);
-$ALID = protect($_GET["ALID"]);
-$title = protect($_GET["Title"]);
-$date = new DateTime("now");
-$dateStr = $date->format("Y:m:d");
 $authKey = protect($_GET["AuthKey"]);
+$filter = protect($_GET["filter"]);
 
 try {
     $conn = connect();
@@ -35,13 +29,18 @@ if ($res->num_rows > 1) {
 }
 
 try {
-    $sqlRun = "INSERT INTO machtA(SID, Kuerzel, AID, bestaetigt, Klassenstufe, Stufe, Titel, Datum) VALUES ('$SID', '$kuerzel', '$AID', 0, '$gradeLevel', (SELECT Stufe FROM optionen WHERE AID = '$AID' AND ALID = '$ALID'), '$title', '$dateStr')";
-    $conn->query($sqlRun);
+    $filter = "%" . $filter . "%";
+    $sqlRun = "SELECT SFID, Name, Art FROM Schulfach AS SF WHERE SF.Name Like '$filter'";
+    $res = $conn->query($sqlRun);
 } catch (Exception $e) {
     throwError("Something went wrong with the query", 500, "Etwas ist mit der Datenbankabfrage falsch gelaufen");
     exit();
 }
 
-echo json_encode(["Status" => "200", "Message" => "Success"]);
+$listClasses = [];
+foreach ($res as $class){
+    array_push($listClasses, $class);
+}
+echo json_encode(["Items"=>$listClasses, "Status"=>"200", "Message"=>"Success"]);
 
 $conn->close();

@@ -10,14 +10,6 @@ var vue = new Vue({
             loggedIn: ""
         }
     },
-    watch: {
-        'searchQuerys.activitys': function (val) {
-            this.getAllActivities(val);
-        },
-        'searchQuerys.pending': function (val) {
-            this.getPendingActivities(val);
-        }
-    },
     methods: {
         getUserInfos: function(recall){
             let data = {
@@ -57,6 +49,9 @@ var vue = new Vue({
 
         runAddActivity() {
             window.location.replace("./AddActivity/");
+        },
+        runAddClass(){
+            window.location.replace("./AddClass/");
         },
         runEvaluation() {
             window.location.replace("./Evaluation/");

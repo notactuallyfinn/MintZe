@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 30. Aug 2024 um 22:11
+-- Erstellungszeit: 01. Sep 2024 um 21:43
 -- Server-Version: 10.4.32-MariaDB
 -- PHP-Version: 8.2.12
 
@@ -94,7 +94,6 @@ CREATE TABLE `machtsf` (
   `Klassenstufe` enum('5','6','7','8','9','10','Q1','Q2','Q3','Q4','11') NOT NULL,
   `bestaetigt` tinyint(1) NOT NULL,
   `Note` int(2) NOT NULL,
-  `Kursart` enum('GK','LK') DEFAULT NULL,
   `Titel` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -146,7 +145,8 @@ CREATE TABLE `schueler` (
 
 CREATE TABLE `schulfach` (
   `SFID` int(5) NOT NULL,
-  `Name` enum('Mathe','Physik','NAWI','Biologie','Chemie','Informatik','BLL','Fachwissenschaftliche Arbeit','wissenschaftspropädeutisches Fach') NOT NULL
+  `Name` enum('Mathe','Physik','NAWI','Biologie','Chemie','Informatik','BLL','Fachwissenschaftliche Arbeit','wissenschaftspropädeutisches Fach') NOT NULL,
+  `Art` enum('GK','LK') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

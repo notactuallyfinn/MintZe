@@ -46,8 +46,9 @@
 		<div class="bodycomponents mainContent" v-if="loggedIn">
 			<h1 class="display-1">{{userData.Vorname}} {{userData.Name}} - {{userData.Klasse}}</h1>
 			<div class="content">
-					<button type="button" class="btn btn-primary" style='margin-right:16px' @click="runAddActivity">Aktivitäten hinzufügen</button>
-					<button type="button" class="btn btn-primary" style='margin-right:16px' @click="runSeeActivities">Aktivitäten einsehen</button>
+					<button type="button" class="btn btn-primary" style='margin-right:16px' @click="runAddActivity">Aktivitäten/ Wettbewerbe/ WP-Kurse hinzufügen</button>
+					<button type="button" class="btn btn-primary" style='margin-right:16px' @click="runAddClass">belegte Fächer/ BLLs u.ä. hinzufügen</button>
+					<button type="button" class="btn btn-primary" style='margin-right:16px' @click="runSeeActivities">Teilnahmen einsehen</button>
 					<button type="button" class="btn btn-primary" @click="runEvaluation">Auswertung</button>
 			</div>
 		</div>

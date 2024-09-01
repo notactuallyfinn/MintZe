@@ -2,10 +2,10 @@
 include "../util.php";
 
 $SID = protect($_GET["SID"]);
-$AID = protect($_GET["AID"]);
+$SFID = protect($_GET["SFID"]);
 $kuerzel = protect($_GET["Kuerzel"]);
 $gradeLevel = protect($_GET["GradeLevel"]);
-$ALID = protect($_GET["ALID"]);
+$points = protect($_GET["Points"]);
 $title = protect($_GET["Title"]);
 $date = new DateTime("now");
 $dateStr = $date->format("Y:m:d");
@@ -35,7 +35,7 @@ if ($res->num_rows > 1) {
 }
 
 try {
-    $sqlRun = "INSERT INTO machtA(SID, Kuerzel, AID, bestaetigt, Klassenstufe, Stufe, Titel, Datum) VALUES ('$SID', '$kuerzel', '$AID', 0, '$gradeLevel', (SELECT Stufe FROM optionen WHERE AID = '$AID' AND ALID = '$ALID'), '$title', '$dateStr')";
+    $sqlRun = "INSERT INTO machtSF(SID, SFID, Kuerzel, Datum, Klassenstufe, bestaetigt, Note, Titel) VALUES ('$SID', '$SFID', '$kuerzel', '$dateStr', '$gradeLevel', 0, '$points', '$title')";
     $conn->query($sqlRun);
 } catch (Exception $e) {
     throwError("Something went wrong with the query", 500, "Etwas ist mit der Datenbankabfrage falsch gelaufen");

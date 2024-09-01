@@ -8,18 +8,19 @@ var vue = new Vue({
             AuthKey: "",
             userData: {},
             loggedIn: "",
-            activities: [],
-            chosenAID: "",
-            gradesOfActivity: [],
-            chosenGrade: "",
+            classes: [],
+            chosenSFID: "",
+            chosenType: "",
+            possiblePoints: [],
+            chosenPoints: "",
             gradeLevels: [],
             chosenGradeLevel: "",
             possibleTeachers: [],
             chosenTeacher: "",
             title: "",
             searchQueries: {
-                allActivities: "",
-                gradesOfActivity: "",
+                allClasses: "",
+                possiblePoints: "",
                 gradeLevels: "",
                 possibleTeachers: "",
                 setTitle: ""
@@ -27,11 +28,11 @@ var vue = new Vue({
         }
     },
     watch: {
-        'searchQueries.allActivities': function (val) {
-            this.getAllActivities(val);
+        'searchQueries.allClasses': function (val) {
+            this.getAllClasses(val);
         },
-        'searchQueries.gradesOfActivity': function (val) {
-            this.getGradesOfActivity(val);
+        'searchQueries.possiblePoints': function (val) {
+            this.getPossiblePoints(val, 0);
         },
         'searchQueries.gradeLevels': function (val) {
             this.getGradeLevels(val);
@@ -62,7 +63,7 @@ var vue = new Vue({
                 }
             }
         },
-        getAllActivities: function (filter) {
+        getAllClasses: function (filter) {
             let self = this;
             let data = {
                 "SID": this.SID,
@@ -70,33 +71,33 @@ var vue = new Vue({
                 "filter": filter
             }
             let xml = new XMLHttpRequest();
-            xml.open("GET", this.echoParams(this.apiEndpoint + "get/possibleActivities.php", data));
+            xml.open("GET", this.echoParams(this.apiEndpoint + "get/possibleClasses.php", data));
             xml.send();
             xml.onload = function () {
                 let data = JSON.parse(this.response);
                 if (data.Status == "200") {
-                    self.activities = data.Items;
+                    self.classes = data.Items;
                 } else {
                     window.location.replace("../../");
                 }
             }
         },
-        getGradesOfActivity: function (filter) {
-            if (this.chosenAID != "") {
+        getPossiblePoints: function (filter, exact) {
+            if (this.chosenSFID != "") {
                 let self = this;
                 let data = {
                     "SID": this.SID,
                     "AuthKey": this.AuthKey,
-                    "AID": this.chosenAID,
-                    "filter": filter
+                    "filter": filter,
+                    "Exact": exact
                 }
                 let xml = new XMLHttpRequest();
-                xml.open("GET", this.echoParams(this.apiEndpoint + "get/gradesOfActivity.php", data));
+                xml.open("GET", this.echoParams(this.apiEndpoint + "get/possiblePoints.php", data));
                 xml.send();
                 xml.onload = function () {
                     let data = JSON.parse(this.response);
                     if (data.Status == "200") {
-                        self.gradesOfActivity = data.Items;
+                        self.possiblePoints = data.Items;
                     } else {
                         window.location.replace("../../");
                     }
@@ -104,7 +105,10 @@ var vue = new Vue({
             }
         },
         getGradeLevels: function (filter) {
-            if (this.chosenAID != "" && this.chosenGrade != "") {
+            if (this.chosenSFID != "" && "" + this.chosenPoints != "") {
+                if (!filter.startsWith("Q")){
+                    filter = "Q" + filter;
+                }
                 let self = this;
                 let data = {
                     "SID": this.SID,
@@ -122,15 +126,18 @@ var vue = new Vue({
                         window.location.replace("../../");
                     }
                 }
+            } else {
+                console.log("a" + this.chosenSFID + "a");
+                console.log("a" + this.chosenPoints + "a");
             }
         },
         getPossibleTeachers: function (filter) {
-            if (this.chosenAID != "" && this.chosenGrade != "" && this.chosenGradeLevel != "") {
+            if (this.chosenSFID != "" && "" + this.chosenPoints != "" && this.chosenGradeLevel != "") {
                 let self = this;
                 let data = {
                     "SID": this.SID,
                     "AuthKey": this.AuthKey,
-                    "class": "",
+                    "class": this.chosenSFID,
                     "filter": filter
                 }
                 let xml = new XMLHttpRequest();
@@ -147,17 +154,18 @@ var vue = new Vue({
             }
         },
 
-        chooseActivity(AID, Name) {
-            this.chosenAID = AID;
-            this.getAllActivities(Name);
-            this.chosenGrade = "";
+        chooseClass(SFID, Name, Type) {
+            this.chosenSFID = SFID;
+            this.chosenType = Type;
+            this.getAllClasses(Name);
+            this.chosenPoints = "";
             this.chosenGradeLevel = "";
             this.chosenTeacher = "";
-            this.getGradesOfActivity("");
+            this.getPossiblePoints("", 0);
         },
-        chooseGradeOfActivity(ALID, Bezeichnung) {
-            this.chosenGrade = ALID;
-            this.getGradesOfActivity(Bezeichnung);
+        choosePoints(Punkte) {
+            this.chosenPoints = Punkte;
+            this.getPossiblePoints(Punkte, 1);
             this.chosenGradeLevel = "";
             this.chosenTeacher = "";
             this.getGradeLevels("");
@@ -172,31 +180,32 @@ var vue = new Vue({
             this.chosenTeacher = Kuerzel;
             this.getPossibleTeachers(Kuerzel);
         },
-        createPendingActivity(){
-            if (this.chosenAID != "" && this.chosenGrade != "" && this.chosenGradeLevel != "" && this.chosenTeacher != "") {
+        createPendingClass(){
+            if (this.chosenSFID != "" && "" + this.chosenPoints != "" && this.chosenGradeLevel != "" && this.chosenTeacher != "") {
                 let self = this;
                 let data = {
                     "SID": this.SID,
                     "Kuerzel": this.chosenTeacher,
-                    "AID": this.chosenAID,
+                    "SFID": this.chosenSFID,
                     "GradeLevel": this.chosenGradeLevel,
-                    "ALID": this.chosenGrade,
+                    "Points": this.chosenPoints,
                     "Title": this.title,
                     "AuthKey": this.AuthKey
                 }
                 let xml = new XMLHttpRequest();
-                xml.open("GET", this.echoParams(this.apiEndpoint + "action/createPendingActivity.php", data));
+                xml.open("GET", this.echoParams(this.apiEndpoint + "action/createPendingClasses.php", data));
                 xml.send();
                 xml.onload = function () {
+                    console.log(this.response);
                     let data = JSON.parse(this.response);
                     if (data.Status == "200") {
                         self.chooseTeacher("");
                         self.chooseGradeLevel("");
-                        self.chooseGradeOfActivity("", "");
-                        self.chooseActivity("", "");
+                        self.choosePoints("");
+                        self.chooseClass("", "", "");
                         window.location.replace("../");
                     } else {
-                        window.location.replace("../../");
+                        //window.location.replace("../../");
                     }
                 }
             }
@@ -221,7 +230,7 @@ var vue = new Vue({
             this.SID = this.getCookie("SID");
             this.AuthKey = this.getCookie("AuthKey");
             this.getUserInfos(this.login);
-            this.getAllActivities("");
+            this.getAllClasses("");
         },
 
         getCookie: function (cname) {
