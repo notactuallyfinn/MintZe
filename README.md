@@ -9,7 +9,7 @@ ToDoList:
 -Darstellung von Fehler- und Statusmeldungen auf allen Seiten ermöglichen  
 -Adminseite hinzufügen:  
 ---Passwörter ändern  
----Personenbezogene Daten ändern. 
+---Personenbezogene Daten ändern  
 ---neue Aktivitäten und Fächer sowie Leistungskategorienhinzufügen  
 ---Verknüpfung zwischen Aktivitäten und Leistungskategorien hinzufügen  
 ---Liste der Auswertung ausdrucken  
