@@ -4,13 +4,13 @@ ToDoList:
 -UI Layout angucken und von funktional auf schick und funktional ändern  
 -AuswertungsPHPScript hinzufügen und einbinden  
 -Klasse in machtA und machtSF zu Teil des Primary Key anstelle von Datum  
-  -evtl. AnzahlProJahr Feld, weil sonst nur einmal möglich  
+---evtl. AnzahlProJahr Feld, weil sonst nur einmal möglich  
 -Lehrer müssen Anfragen ablehnen können und Schüler Anfragen zurückziehen  
 -Darstellung von Fehler- und Statusmeldungen auf allen Seiten ermöglichen  
 -Adminseite hinzufügen:  
-  -Passwörter ändern  
-  -Personenbezogene Daten ändern. 
-  -neue Aktivitäten und Fächer sowie Leistungskategorienhinzufügen  
-  -Verknüpfung zwischen Aktivitäten und Leistungskategorien hinzufügen  
-  -Liste der Auswertung ausdrucken  
+---Passwörter ändern  
+---Personenbezogene Daten ändern. 
+---neue Aktivitäten und Fächer sowie Leistungskategorienhinzufügen  
+---Verknüpfung zwischen Aktivitäten und Leistungskategorien hinzufügen  
+---Liste der Auswertung ausdrucken  
 -SID entfernen und unique Benutzername stattdessen als Primary Key verwenden  
