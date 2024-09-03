@@ -17,14 +17,19 @@ var vue = new Vue({
         }
     },
     watch: {
+        // sets the variable to be watched
+        // when used in HTML the function is invoked
         'searchQueries.pendingActivities': function (val) {
             this.getPendingActivities(val);
         },
+        // sets the variable to be watched
+        // when used in HTML the function is invoked
         'searchQueries.pendingClasses': function(val) {
             this.getPendingClasses(val);
         }
     },
     methods: {
+        // calls the script that gets the user data from the data base
         getTeacherInfos(recall) {
             let data = {
                 "Kuerzel": this.Kuerzel,
@@ -42,6 +47,7 @@ var vue = new Vue({
                 }
             }
         },
+        // calls the script that gets all pending activity requests for the teacher from the data base
         getPendingActivities: function (filter) {
             let self = this;
             let data = {
@@ -62,6 +68,7 @@ var vue = new Vue({
                 }
             }
         },
+        // calls the script that gets all pending class requests for the teacher from the data base
         getPendingClasses: function (filter) {
             let self = this;
             let data = {
@@ -83,6 +90,8 @@ var vue = new Vue({
             }
         },
 
+        // function that can be run from a button in HTML
+        // calls the script that confirmes the pending request of the student for participating in the activity
         confirmActivity(AID, SID, date) {
             let self = this;
             let data = {
@@ -99,6 +108,8 @@ var vue = new Vue({
                 self.getPendingActivities("");
             }
         },
+        // function that can be run from a button in HTML
+        // calls the script that denies the pending request of the student for participating in the activity
         denyActivity(AID, SID, date){
             let self = this;
             let data = {
@@ -115,6 +126,8 @@ var vue = new Vue({
                 self.getPendingActivities("");
             }
         },
+        // function that can be run from a button in HTML
+        // calls the script that confirmes the pending request of the student for participating in the class
         confirmClass(SFID, SID, date) {
             let self = this;
             let data = {
@@ -131,6 +144,8 @@ var vue = new Vue({
                 self.getPendingClasses("");
             }
         },
+        // function that can be run from a button in HTML
+        // calls the script that denies the pending request of the student for participating in the class
         denyClass(SFID, SID, date) {
             let self = this;
             let data = {
@@ -148,6 +163,7 @@ var vue = new Vue({
             }
         },
 
+        // appends the data to be send to the url in the correct format
         echoParams(url, data) {
             var string = url + "?";
             for (key in data) {
@@ -155,10 +171,14 @@ var vue = new Vue({
             }
             return string;
         },
+
+        //sets the state to logged in and asignes the user data to its designated variable
         login(data) {
             this.loggedIn = true;
             this.userData = data;
         },
+        // function that is called in created upon changing to this page
+        // retrieves the login informations and initalizes the call for the user data
         init() {
             this.Kuerzel = this.getCookie("Kuerzel");
             this.AuthKey = this.getCookie("AuthKey");
@@ -167,6 +187,8 @@ var vue = new Vue({
             this.getPendingClasses("");
         },
 
+
+        // returns the value of the specified cookie or an empty string
         getCookie: function (cname) {
             let name = cname + "=";
             let cookies = decodeURIComponent(document.cookie).split(';');
@@ -178,6 +200,7 @@ var vue = new Vue({
             return "";
         }
     },
+    //function that is called upon changing into this folder
     created() {
         this.init();
     }

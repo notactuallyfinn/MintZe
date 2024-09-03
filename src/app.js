@@ -17,6 +17,7 @@ var vue = new Vue({
         }
     },
     methods: {
+        // calls the scripts that checks the login credentials of a student and passes the result to the recall function
         checkStudentPassword: function(username, password, recall){
             let data = {
                 "Password": password,
@@ -34,6 +35,7 @@ var vue = new Vue({
                 recall(this.response);
             }
         },
+        // calls the scripts that checks the login credentials of a teacher and passes the result to the recall function
         checkTeacherPassword: function(kuerzel, password, recall) {
             let data = {
                 "Password": password,
@@ -52,7 +54,10 @@ var vue = new Vue({
             }
         },
 
-        // Recalls
+        // recall of the run functions
+        // parses the returned json data and checks wheter the operation was a success
+        // then sets login information as a cookie for later use
+        // in the end moves current open page into the correct subfolder
         login(data) {
             let dataJs = JSON.parse(data);
             if (dataJs.Status == "200") {
@@ -70,18 +75,24 @@ var vue = new Vue({
             }
         },
 
-        // Runs
+        // function that can be run from a button in HTML
+        // initializes run of the login procedure for students
         runLoginStudent() {
             this.checkStudentPassword(this.loginInformations.username, this.loginInformations.password, this.login);
         },
+        // function that can be run from a button in HTML
+        // initializes run of the login procedure for teachers
         runLoginTeacher() {
             this.checkTeacherPassword(this.loginInformations.kuerzel, this.loginInformations.password, this.login);
         },
 
+        // creates a cookie with the specified name and value or 
+        // overwrites the cookie with the specified name with the new value
         setCookie: function(name, value){
             document.cookie = name + "=" + value + "; path=/";
         }
     }, 
+    //function that is called upon changing into this folder
     created() {
     }
 });

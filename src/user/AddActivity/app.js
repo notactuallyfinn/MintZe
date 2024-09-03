@@ -27,23 +27,34 @@ var vue = new Vue({
         }
     },
     watch: {
+        // sets the variable to be watched
+        // when used in HTML the function is invoked
         'searchQueries.allActivities': function (val) {
             this.getAllActivities(val);
         },
+        // sets the variable to be watched
+        // when used in HTML the function is invoked
         'searchQueries.gradesOfActivity': function (val) {
             this.getGradesOfActivity(val);
         },
+        // sets the variable to be watched
+        // when used in HTML the function is invoked
         'searchQueries.gradeLevels': function (val) {
             this.getGradeLevels(val);
         },
+        // sets the variable to be watched
+        // when used in HTML the function is invoked
         'searchQueries.possibleTeachers': function (val) {
             this.getPossibleTeachers(val);
         },
+        // sets the variable to be watched
+        // when used in HTML the function is invoked
         'searchQueries.setTitle': function (val) {
             this.title = val;
         }
     },
     methods: {
+        // calls the script that gets the user data from the data base
         getUserInfos: function (recall) {
             let data = {
                 "SID": this.SID,
@@ -62,6 +73,7 @@ var vue = new Vue({
                 }
             }
         },
+        // calls the script that gets all possible activities to be chosen from from the data base
         getAllActivities: function (filter) {
             let self = this;
             let data = {
@@ -81,6 +93,7 @@ var vue = new Vue({
                 }
             }
         },
+        // calls the script that gets the possible grades of achievement from the data base
         getGradesOfActivity: function (filter) {
             if (this.chosenAID != "") {
                 let self = this;
@@ -103,6 +116,7 @@ var vue = new Vue({
                 }
             }
         },
+        // calls the script that gets the possible grade levels the class can be taken at from the data base
         getGradeLevels: function (filter) {
             if (this.chosenAID != "" && this.chosenGrade != "") {
                 let self = this;
@@ -124,6 +138,7 @@ var vue = new Vue({
                 }
             }
         },
+        // calls the script that gets the possible teachers that can confirm the users participation from the data base
         getPossibleTeachers: function (filter) {
             if (this.chosenAID != "" && this.chosenGrade != "" && this.chosenGradeLevel != "") {
                 let self = this;
@@ -147,6 +162,8 @@ var vue = new Vue({
             }
         },
 
+        // function that can be run from a button in HTML
+        // sets the chosen activity and calls other required functions
         chooseActivity(AID, Name) {
             this.chosenAID = AID;
             this.getAllActivities(Name);
@@ -155,6 +172,8 @@ var vue = new Vue({
             this.chosenTeacher = "";
             this.getGradesOfActivity("");
         },
+        // function that can be run from a button in HTML
+        // sets the chosen grade of achievement and calls other required functions
         chooseGradeOfActivity(ALID, Bezeichnung) {
             this.chosenGrade = ALID;
             this.getGradesOfActivity(Bezeichnung);
@@ -162,16 +181,22 @@ var vue = new Vue({
             this.chosenTeacher = "";
             this.getGradeLevels("");
         },
+        // function that can be run from a button in HTML
+        // sets the chosen grade level and calls other required functions
         chooseGradeLevel(gradeLevel) {
             this.chosenGradeLevel = gradeLevel;
             this.getGradeLevels(gradeLevel);
             this.chosenTeacher = "";
             this.getPossibleTeachers("");
         },
+        // function that can be run from a button in HTML
+        // sets the chosen teacher and calls other required functions
         chooseTeacher(Kuerzel) {
             this.chosenTeacher = Kuerzel;
             this.getPossibleTeachers(Kuerzel);
         },
+        // function that can be run from a button in HTML
+        // calls the script that creates the pending request of the student for participating in the activity
         createPendingActivity(){
             if (this.chosenAID != "" && this.chosenGrade != "" && this.chosenGradeLevel != "" && this.chosenTeacher != "") {
                 let self = this;
@@ -202,6 +227,7 @@ var vue = new Vue({
             }
         },
 
+        // appends the data to be send to the url in the correct format
         echoParams(url, data) {
             var string = url + "?";
             for (key in data) {
@@ -210,13 +236,13 @@ var vue = new Vue({
             return string;
         },
 
-        update() {
-
-        },
+        //sets the state to logged in and asignes the user data to its designated variable
         login(data) {
             this.loggedIn = true;
             this.userData = data;
         },
+        // function that is called in created upon changing to this page
+        // retrieves the login informations and initalizes the call for the user data
         init() {
             this.SID = this.getCookie("SID");
             this.AuthKey = this.getCookie("AuthKey");
@@ -224,6 +250,7 @@ var vue = new Vue({
             this.getAllActivities("");
         },
 
+        // returns the value of the specified cookie or an empty string
         getCookie: function (cname) {
             let name = cname + "=";
             let cookies = decodeURIComponent(document.cookie).split(';');
@@ -235,9 +262,8 @@ var vue = new Vue({
             return "";
         }
     },
+    //function that is called upon changing into this folder
     created() {
         this.init();
-        this.update();
-        setInterval(this.update, 1000);
     }
 });

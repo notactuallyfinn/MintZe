@@ -20,6 +20,7 @@ var vue = new Vue({
         }
     },
     methods: {
+        // calls the script that gets the user data from the data base
         getUserInfos: function(recall){
             let data = {
                 "SID": this.SID,
@@ -39,6 +40,7 @@ var vue = new Vue({
             }
         },
 
+        // appends the data to be send to the url in the correct format
         echoParams(url, data) {
             var string = url + "?";
             for (key in data) {
@@ -47,18 +49,22 @@ var vue = new Vue({
             return string;
         },
         
+        //sets the state to logged in and asignes the user data to its designated variable
         login(data) {
             this.loggedIn = true;
             this.userData = data;
         },
+        // function that is called in created upon changing to this page
+        // retrieves the login informations and initalizes the call for the user data
         init() {
             this.SID = this.getCookie("SID");
             this.AuthKey = this.getCookie("AuthKey");
             this.getUserInfos(this.login);
             
-            //call to evaluation algorithm
+            //call to evaluation algorithm missing
         },
 
+        // returns the value of the specified cookie or an empty string
         getCookie: function(cname){
             let name = cname + "=";
             let cookies = decodeURIComponent(document.cookie).split(';');
@@ -70,6 +76,7 @@ var vue = new Vue({
             return "";
         }
     }, 
+    //function that is called upon changing into this folder
     created() {
         this.init();
     }
