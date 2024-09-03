@@ -31,7 +31,7 @@ if ($res->num_rows > 1) {
 }
 
 try {
-    $sqlRun = "UPDATE machtA SET bestaetigt = 1 WHERE SID = '$SID' AND AID = '$AID' AND Datum LIKE '$date'";
+    $sqlRun = "DELETE FROM machtA WHERE SID = '$SID' AND AID = '$AID' AND Datum LIKE '$date'";
     $conn->query($sqlRun);
 } catch (Exception $e) {
     throwError("Something went wrong with the query", 500, "Etwas ist mit der Datenbankabfrage falsch gelaufen");

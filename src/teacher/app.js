@@ -9,14 +9,19 @@ var vue = new Vue({
             userData: {},
             loggedIn: "",
             searchQueries: {
-                pendingActivities: ""
+                pendingActivities: "",
+                pendingClasses: ""
             },
-            pendingActivities: []
+            pendingActivities: [],
+            pendingClasses: []
         }
     },
     watch: {
         'searchQueries.pendingActivities': function (val) {
             this.getPendingActivities(val);
+        },
+        'searchQueries.pendingClasses': function(val) {
+            this.getPendingClasses(val);
         }
     },
     methods: {
@@ -57,6 +62,26 @@ var vue = new Vue({
                 }
             }
         },
+        getPendingClasses: function (filter) {
+            let self = this;
+            let data = {
+                "Kuerzel": this.Kuerzel,
+                "AuthKey": this.AuthKey,
+                "confirmed": 0,
+                "filter": filter
+            }
+            let xml = new XMLHttpRequest();
+            xml.open("GET", this.echoParams(this.apiEndpoint + "get/pendingClassesTeacher.php", data));
+            xml.send();
+            xml.onload = function () {
+                let data = JSON.parse(this.response);
+                if (data.Status == "200") {
+                    self.pendingClasses = data.Items;
+                } else {
+                    window.location.replace("../");
+                }
+            }
+        },
 
         confirmActivity(AID, SID, date) {
             let self = this;
@@ -72,7 +97,54 @@ var vue = new Vue({
             xml.send();
             xml.onload = function() {
                 self.getPendingActivities("");
-                console.log(this.response);
+            }
+        },
+        denyActivity(AID, SID, date){
+            let self = this;
+            let data = {
+                "SID": SID,
+                "AID": AID,
+                "date": date,
+                "AuthKey": this.AuthKey,
+                "Kuerzel": this.Kuerzel
+            }
+            let xml = new XMLHttpRequest();
+            xml.open("GET", this.echoParams(this.apiEndpoint + "action/denyActivity.php", data));
+            xml.send();
+            xml.onload = function() {
+                self.getPendingActivities("");
+            }
+        },
+        confirmClass(SFID, SID, date) {
+            let self = this;
+            let data = {
+                "SID": SID,
+                "SFID": SFID,
+                "date": date,
+                "AuthKey": this.AuthKey,
+                "Kuerzel": this.Kuerzel
+            }
+            let xml = new XMLHttpRequest();
+            xml.open("GET", this.echoParams(this.apiEndpoint + "action/confirmClass.php", data));
+            xml.send();
+            xml.onload = function() {
+                self.getPendingClasses("");
+            }
+        },
+        denyClass(SFID, SID, date) {
+            let self = this;
+            let data = {
+                "SID": SID,
+                "SFID": SFID,
+                "date": date,
+                "AuthKey": this.AuthKey,
+                "Kuerzel": this.Kuerzel
+            }
+            let xml = new XMLHttpRequest();
+            xml.open("GET", this.echoParams(this.apiEndpoint + "action/denyClass.php", data));
+            xml.send();
+            xml.onload = function() {
+                self.getPendingClasses("");
             }
         },
 
@@ -92,6 +164,7 @@ var vue = new Vue({
             this.AuthKey = this.getCookie("AuthKey");
             this.getTeacherInfos(this.login);
             this.getPendingActivities("");
+            this.getPendingClasses("");
         },
 
         getCookie: function (cname) {

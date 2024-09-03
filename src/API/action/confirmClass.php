@@ -2,7 +2,7 @@
 include "../util.php";
 
 $SID = protect($_GET["SID"]);
-$AID = protect($_GET["AID"]);
+$SFID = protect($_GET["SFID"]);
 $date = protect($_GET["date"]);
 $kuerzel = protect($_GET["Kuerzel"]);
 $authKey = protect($_GET["AuthKey"]);
@@ -31,7 +31,7 @@ if ($res->num_rows > 1) {
 }
 
 try {
-    $sqlRun = "UPDATE machtA SET bestaetigt = 1 WHERE SID = '$SID' AND AID = '$AID' AND Datum LIKE '$date'";
+    $sqlRun = "UPDATE machtSF SET bestaetigt = 1 WHERE SID = '$SID' AND SFID = '$SFID' AND Datum LIKE '$date'";
     $conn->query($sqlRun);
 } catch (Exception $e) {
     throwError("Something went wrong with the query", 500, "Etwas ist mit der Datenbankabfrage falsch gelaufen");

@@ -53,18 +53,44 @@
 		<div class="bodycomponents mainContent" v-if="loggedIn">
 			<h1 class="display-1">{{userData.Ansprache}} {{userData.Name}} ({{userData.Kuerzel}})</h1>
 			<div class="content">
-				<div class="anmeldung">
-					<div class="element-header">
-						<h3 class="display-4 headerInElement">Pending</h3>
-					</div>
-					<div class="list">
-						<div class="listItemAnmeldung" v-for="item in pendingActivities">
-							<p class="font-weight-normal">{{ item.Vorname }}
-							</p><i class="fa-solid fa-check funcButton" @click="confirmActivity(item.AID, item.SID, item.Datum)"></i>
+				<div class="middle">
+					<div class="anmeldung">
+						<div class="element-header">
+							<h3 class="display-4 headerInElement">Pending außerschulische Aktivitäten</h3>
+						</div>
+						<div class="list">
+							<div class="listItemAnmeldung" v-for="item in pendingActivities">
+								<p class="font-weight-normal">{{ item.Vorname }}
+								</p><i class="fa-solid fa-check funcButton"
+									@click="confirmActivity(item.AID, item.SID, item.Datum)"></i><i
+									class="fa-solid fa-times funcButton"
+									@click="denyActivity(item.AID, item.SID, item.Datum)"></i>
+							</div>
+						</div>
+						<div class="search">
+							<input type="text" v-model="searchQueries.pendingActivities"
+								placeholder="Vor-/ Nach-/ Benutzername">
 						</div>
 					</div>
-					<div class="search">
-						<input type="text" v-model="searchQueries.pendingActivities" placeholder="Vor-/ Nach-/ Benutzername">
+				</div>
+				<div class="right">
+					<div class="anmeldung">
+						<div class="element-header">
+							<h3 class="display-4 headerInElement">Pending Schulaktivitäten</h3>
+						</div>
+						<div class="list">
+							<div class="listItemAnmeldung" v-for="item in pendingClasses">
+								<p class="font-weight-normal">{{ item.Vorname }}
+								</p><i class="fa-solid fa-check funcButton"
+									@click="confirmClass(item.SFID, item.SID, item.Datum)"></i><i
+									class="fa-solid fa-times funcButton"
+									@click="denyClass(item.SFID, item.SID, item.Datum)"></i>
+							</div>
+						</div>
+						<div class="search">
+							<input type="text" v-model="searchQueries.pendingClasses"
+								placeholder="Vor-/ Nach-/ Benutzername">
+						</div>
 					</div>
 				</div>
 			</div>
