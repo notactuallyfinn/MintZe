@@ -4,7 +4,7 @@ ToDoList:
 -UI Layout angucken und von funktional auf schick und funktional ändern  
 -AuswertungsPHPScript hinzufügen und einbinden  
 -Attribut von Aktivität mit Anzahl pro Schuljahr    
----evtl. AnzahlProJahr Feld, weil sonst nur einmal möglich  
+---mit php logik zum Einhalten zwingen  
 -Schüler müssen Anfragen zurückziehen können  
 -Darstellung von Fehler- und Statusmeldungen auf allen Seiten ermöglichen  
 -Adminseite hinzufügen:  
