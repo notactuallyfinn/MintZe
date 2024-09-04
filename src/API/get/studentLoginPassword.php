@@ -20,7 +20,7 @@ try {
 }
 
 try {
-    $res = $conn->query("SELECT * FROM Schueler WHERE Benutzername = '$username'");
+    $res = $conn->query("SELECT * FROM schueler WHERE Benutzername = '$username'");
 } catch (Exception $e) {
     throwError("Something went wrong with the query", 500, "Etwas ist mit der Datenbankabfrage falsch gelaufen");
     exit();
@@ -43,7 +43,7 @@ if (password_verify($password, $student["Passwort"]) == 0) {
     $SID = $student["SID"];
     $authKey = randomString(64);
     try {
-        $res = $conn->query("UPDATE Schueler SET AuthKey = '$authKey' WHERE SID = '$SID'");
+        $res = $conn->query("UPDATE schueler SET AuthKey = '$authKey' WHERE SID = '$SID'");
     } catch (Exception $e) {
         throwError("Something went wrong with the query", 500, "Etwas ist mit der Datenbankabfrage falsch gelaufen");
         exit();

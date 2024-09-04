@@ -12,7 +12,7 @@ try {
 }
 
 try {
-    $sqlRun = "SELECT * FROM Schueler WHERE SID = '$SID' AND AuthKey = '$authKey'";
+    $sqlRun = "SELECT * FROM schueler WHERE SID = '$SID' AND AuthKey = '$authKey'";
     $res = $conn->query($sqlRun);
 } catch (Exception $e) {
     throwError("Something went wrong with the query", 500, "Etwas ist mit der Datenbankabfrage falsch gelaufen");

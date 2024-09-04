@@ -15,7 +15,7 @@ try {
 }
 
 try {
-    $sqlTest = "SELECT Kuerzel FROM Lehrer WHERE Kuerzel = '$kuerzel' AND AuthKey = '$authKey'";
+    $sqlTest = "SELECT Kuerzel FROM lehrer WHERE Kuerzel = '$kuerzel' AND AuthKey = '$authKey'";
     $res = $conn->query($sqlTest);
 } catch (Exception $e) {
     throwError("Something went wrong with the query", 500, "Etwas ist mit der Datenbankabfrage falsch gelaufen");

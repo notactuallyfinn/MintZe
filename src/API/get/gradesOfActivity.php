@@ -14,7 +14,7 @@ try {
 }
 
 try {
-    $sqlTest = "SELECT SID FROM Schueler WHERE SID = '$SID' AND AuthKey = '$authKey'";
+    $sqlTest = "SELECT SID FROM schueler WHERE SID = '$SID' AND AuthKey = '$authKey'";
     $res = $conn->query($sqlTest);
 } catch (Exception $e) {
     throwError("Something went wrong with the query", 500, "Etwas ist mit der Datenbankabfrage falsch gelaufen");
@@ -31,7 +31,7 @@ if ($res->num_rows > 1) {
 
 try {
     $filter = "%" . $filter . "%";
-    $sqlRun = "SELECT AL.ALID AS ALID, AL.Bezeichnung AS Bezeichnung FROM Aktivitaet AS A, optionen AS o, ALeistung AS AL WHERE A.AID = '$AID' AND A.AID = o.AID AND o.ALID = AL.ALID AND AL.Bezeichnung LIKE '$filter'";
+    $sqlRun = "SELECT AL.ALID AS ALID, AL.Bezeichnung AS Bezeichnung FROM aktivitaet AS A, optionen AS o, aLeistung AS AL WHERE A.AID = '$AID' AND A.AID = o.AID AND o.ALID = AL.ALID AND AL.Bezeichnung LIKE '$filter'";
     $res = $conn->query($sqlRun);
 } catch (Exception $e) {
     throwError("Something went wrong with the query", 500, "Etwas ist mit der Datenbankabfrage falsch gelaufen");

@@ -19,7 +19,7 @@ try {
     throwError("Connection to the database is not possible", 503, "Verbindung mit der Datenbank ist nicht möglich");
     exit();
 }
-$sql = "SELECT * FROM Lehrer WHERE Kuerzel = '$kuerzel'";
+$sql = "SELECT * FROM lehrer WHERE Kuerzel = '$kuerzel'";
 try {
     $res = $conn->query($sql);
 } catch (Exception $e) {
@@ -45,7 +45,7 @@ if (password_verify($password, $teacher["Passwort"]) == 0) {
     $Kuerzel = $teacher["Kuerzel"];
     $authKey = randomString(64);
     try {
-        $res = $conn->query("UPDATE Lehrer SET AuthKey = '$authKey' WHERE Kuerzel = '$Kuerzel'");
+        $res = $conn->query("UPDATE lehrer SET AuthKey = '$authKey' WHERE Kuerzel = '$Kuerzel'");
     } catch (Exception $e) {
         throwError("Something went wrong with the query", 500, "Etwas ist mit der Datenbankabfrage falsch gelaufen");
         exit();
