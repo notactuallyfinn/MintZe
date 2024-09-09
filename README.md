@@ -7,10 +7,10 @@ ToDoList:
 ---mit php logik zum Einhalten zwingen  
 -Schüler müssen Anfragen zurückziehen können  
 -Darstellung von Fehler- und Statusmeldungen auf allen Seiten ermöglichen  
+-SID entfernen und unique Benutzername stattdessen als Primary Key verwenden  
 -Adminseite hinzufügen:  
 ---Passwörter ändern  
 ---Personenbezogene Daten ändern  
 ---neue Aktivitäten und Fächer sowie Leistungskategorienhinzufügen  
 ---Verknüpfung zwischen Aktivitäten und Leistungskategorien hinzufügen  
----Liste der Auswertung ausdrucken  
--SID entfernen und unique Benutzername stattdessen als Primary Key verwenden  
+---Liste der Auswertung ausdrucken   
